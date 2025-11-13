@@ -1,4 +1,6 @@
 <?php 
+require_once __DIR__ . '/config/config.php';
+
 session_start();
 
 if (!isset($_SESSION['list'])) {
@@ -26,14 +28,14 @@ switch($action) {
             fn($item) => $item['id'] !== $id
         ));
         break;
-    
+
     default:
         break;
 }
 
-$file = 'data.json';
+$datafile =  __DIR__ . '/storage/data.json';
 $list = $_SESSION['list'];
-file_put_contents($file, json_encode($list, JSON_PRETTY_PRINT));
+file_put_contents($datafile, json_encode($list, JSON_PRETTY_PRINT));
 
 header("Location: index.php");
 exit;

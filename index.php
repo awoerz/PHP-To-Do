@@ -29,12 +29,14 @@
 <body>
     
     <?php
+        require_once __DIR__ . '/config/config.php';
+
         session_start();
 
         if (!isset($_SESSION['list'])) {
-            $file = 'data.json';
-            if (file_exists($file)) {
-                $json = file_get_contents($file);
+            $datafile = DATA_FILE;
+            if (file_exists($datafile)) {
+                $json = file_get_contents($datafile);
                 $_SESSION['list'] = json_decode($json, true) ?? [];
             } else {
                 $_SESSION['list'] = [];
@@ -48,6 +50,7 @@
         <h1>PHP To-Do</h1>
 
         <h3>Add Item</h3>
+
         <form class="add-item-form" action="action.php" method="post">
             <label class="spacer" for="item">New item</label>
             <input class="spacer" name="item" type="text">
