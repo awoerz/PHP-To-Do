@@ -1,11 +1,7 @@
 <?php 
 require_once __DIR__ . '/config/config.php';
-
-session_start();
-
-if (!isset($_SESSION['list'])) {
-    $_SESSION['list'] = [];
-}
+$datafile =  __DIR__ . '/storage/data.json';
+$list = json_decode(file_get_contents($datafile), true);
 
 $action = $_POST['action'] ?? '';
 
@@ -14,7 +10,7 @@ switch($action) {
     case 'add':
         $item = trim($_POST['item']);
         if($item !== '') {
-            $_SESSION['list'][] = [
+            $list[] = [
                 'id' => uniqid(),
                 'value' => trim($_POST['item'])
             ];
@@ -23,8 +19,8 @@ switch($action) {
 
     case 'remove': 
         $id = $_POST['id'];
-        $_SESSION['list'] = array_values(array_filter(
-            $_SESSION['list'],
+        $list = array_values(array_filter(
+            $list,
             fn($item) => $item['id'] !== $id
         ));
         break;
@@ -33,8 +29,6 @@ switch($action) {
         break;
 }
 
-$datafile =  __DIR__ . '/storage/data.json';
-$list = $_SESSION['list'];
 file_put_contents($datafile, json_encode($list, JSON_PRETTY_PRINT));
 
 header("Location: index.php");

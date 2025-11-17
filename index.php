@@ -30,20 +30,8 @@
     
     <?php
         require_once __DIR__ . '/config/config.php';
-
-        session_start();
-
-        if (!isset($_SESSION['list'])) {
-            $datafile = DATA_FILE;
-            if (file_exists($datafile)) {
-                $json = file_get_contents($datafile);
-                $_SESSION['list'] = json_decode($json, true) ?? [];
-            } else {
-                $_SESSION['list'] = [];
-            }
-        }
-
-        $my_list = $_SESSION['list'];
+        $datafile =  __DIR__ . '/storage/data.json';
+        $list = json_decode(file_get_contents($datafile), true);
     ?>
 
     <div class="container">
@@ -61,10 +49,10 @@
         <br>
     
         <h3>Items</h3>
-        <?php if(empty($my_list)) :  ?>
+        <?php if(empty($list)) :  ?>
             <p class="text-muted">No items yet.</p>
         <?php else : ?>
-            <?php foreach ($my_list as $item): ?>
+            <?php foreach ($list as $item): ?>
                 <div class=list-item>
                     <form class="remove-item-form" action="action.php" method="post">
                         <input type="hidden" name="action" value="remove">
