@@ -27,7 +27,10 @@
                 <form class="remove-item-form" action="action.php" method="post">
                     <input type="hidden" name="action" value="remove">
                     <input type="hidden" name="id" value="<?php echo $item['id'] ?>">
-                    <button type="submit" class="btn btn-danger btn-sm">-</button>
+                    <a class="btn btn-primary btn-sm" href="./views/edit_item.php?id=<?= $item['id'] ?>">
+                        <i class="bi bi-pencil-square"></i>
+                    </a>
+                    <button type="submit" class="btn btn-danger btn-sm"><i class="bi bi-trash-fill"></i></button>
                 </form>
                 <p class="list-item-view"><?php echo htmlspecialchars($item['value'])?></p>
             </div>
