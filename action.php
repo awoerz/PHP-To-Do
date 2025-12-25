@@ -9,8 +9,14 @@ switch($action) {
     
     case 'add':
         $item = trim($_POST['item']);
+        
         if($item !== '') {
-            $list[] = [
+            $postItem = [
+                'id' => uniqid(),
+                'value' => trim($_POST['item'])
+            ];
+
+            $list[$postItem['id']] = [
                 'id' => uniqid(),
                 'value' => trim($_POST['item'])
             ];
