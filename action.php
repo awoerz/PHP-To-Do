@@ -30,6 +30,18 @@ switch($action) {
             fn($item) => $item['id'] !== $id
         ));
         break;
+    
+    case 'edit':
+        $id = $_POST['id'];
+        $newValue = trim($_POST['item']);   
+        foreach ($list as &$item) {
+            if ($item['id'] === $id) {
+                $item['value'] = $newValue;
+                break;
+            }
+        }
+        unset($item); // Break reference
+        break;
 
     default:
         break;

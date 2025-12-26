@@ -14,6 +14,11 @@
                 display: flex;
                 flex-direction: column;
             }
+            .edit-item-form {
+                max-width: 20rem;
+                display: flex;
+                flex-direction: column;
+            }
             .list-item {
                 display: flex;
                 margin-bottom: .5rem;
